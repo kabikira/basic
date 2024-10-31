@@ -1,3 +1,4 @@
+import 'package:basic/next_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'タイトル'),
     );
   }
 }
@@ -30,13 +31,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  final List<String> entries = <String>['A', 'B', 'C', 'E', 'G'];
 
   @override
   Widget build(BuildContext context) {
@@ -45,26 +40,17 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Container(
-        color: Colors.blue,
-        width: double.infinity,
-        height: 300,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text('panda'),
-            Text('コアラ'),
-            Text('ggg'),
-            ElevatedButton(onPressed: () {}, child: Text('パン'))
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      body: ListView.separated(
+          padding: const EdgeInsets.all(8),
+          itemCount: 100,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              height: 100,
+              child: Center(child: Text('こんにちは $index')),
+            );
+          },
+        separatorBuilder: (BuildContext context, int index) => const Divider(),
+      )
     );
   }
 }
